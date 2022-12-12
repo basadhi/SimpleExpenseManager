@@ -14,17 +14,9 @@ public class SQLiteDB extends SQLiteOpenHelper
     private static final String DB_Name="200644F.db";
     //db version
     private static final int DB_Version =1;
-    //table name
+    //table names
     private static final String TABLE_ACCOUNT =" Accounts";
     private static final String TABLE_TRANSACTION="Transactions";
-
-    //id column
-
-    private static final String ACCOUNTNO="accountNo";
-    private static final String NAME="accountholdername";
-    private static final String BANK_NAME="bankname";
-    private static final String BALANCE="balance";
-
 
 
 

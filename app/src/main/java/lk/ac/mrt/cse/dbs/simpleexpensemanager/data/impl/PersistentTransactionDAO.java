@@ -22,7 +22,7 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Transaction;
 
 public class PersistentTransactionDAO  implements TransactionDAO
 {
-    private static Context context;
+
     private  List<Transaction>transactions;
     private final SQLiteDB db;
 
@@ -36,14 +36,14 @@ public class PersistentTransactionDAO  implements TransactionDAO
         SQLiteDatabase database=this.db.getWritableDatabase();
 
         if (expenseType==ExpenseType.EXPENSE){
-            PersistantAccountDAO persistantAccountDAO=new PersistantAccountDAO(this.db);
+            PersistentAccountDAO persistantAccountDAO=new PersistentAccountDAO(this.db);
             try {
                 Account accountHolder=persistantAccountDAO.getAccount(accountNo);
                 if (accountHolder.getBalance()<amount){
                     return;
                 }
             } catch (Exception e) {
-                System.out.println("Invalid account!");
+                System.out.println("Invalid account number!");
             }
 
         }
@@ -72,7 +72,7 @@ public class PersistentTransactionDAO  implements TransactionDAO
                 String expense_type=cursor.getString(cursor.getColumnIndex("expense_type"));
 
                 Date date1=StringDate(date);
-                Transaction transaction=new Transaction(date1,accountNo,Sexpense(expense_type),amount);
+                Transaction transaction=new Transaction(date1,accountNo,Strexpense(expense_type),amount);
                 transactions.add(transaction);
 
             }
@@ -107,7 +107,7 @@ public class PersistentTransactionDAO  implements TransactionDAO
 
     }
 
-    public ExpenseType Sexpense(String expenseType){
+    public ExpenseType Strexpense(String expenseType){
         String expensetype=expenseType.toUpperCase();
         if (expensetype.equals("EXPENSE")){
             return ExpenseType.EXPENSE;

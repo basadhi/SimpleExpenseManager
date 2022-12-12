@@ -21,7 +21,7 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.exception.InvalidAccountExcep
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Account;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.ExpenseType;
 
-public class PersistantAccountDAO  implements AccountDAO
+public class PersistentAccountDAO  implements AccountDAO
 {
 
 
@@ -30,7 +30,7 @@ public class PersistantAccountDAO  implements AccountDAO
     private final SQLiteDB db;
 
 
-    public PersistantAccountDAO(SQLiteDB sqLiteDB) {
+    public PersistentAccountDAO(SQLiteDB sqLiteDB) {
 
         this.accounts=new ArrayList<>();
         this.db=sqLiteDB;
@@ -131,17 +131,15 @@ public class PersistantAccountDAO  implements AccountDAO
             throws InvalidAccountException
     {
         SQLiteDatabase databse=this.db.getWritableDatabase();
-        String[] projection={
-                "balance"
-        };
+        String[] project={ "balance" };
 
-        String selection="accountNo"+" =? ";
+        String select="accountNo=? ";
         String[] selectionargs={ accountNo };
 
         Cursor cursor= databse.query(
                 "Accounts",
-                projection,
-                selection,
+                project,
+                select,
                 selectionargs,
                 null,
                 null,
@@ -167,6 +165,6 @@ public class PersistantAccountDAO  implements AccountDAO
         cursor.close();
         databse.close();
 
-//
+
  }
 }
